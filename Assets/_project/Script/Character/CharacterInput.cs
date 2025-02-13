@@ -3,7 +3,8 @@ using UnityEngine;
 public class CharacterInput : MonoBehaviour
 {
     [SerializeField] private Joystick joystick;
-    
+    [SerializeField] private Transform transformCamera;
+
     private IControllebl _controllebl;
     private float _horizontalInput;
     private float _verticalInput;
@@ -26,8 +27,15 @@ public class CharacterInput : MonoBehaviour
     private void HarvestInput()
     {
         _horizontalInput = joystick.Horizontal;
-        _verticalInput = joystick.Vertical;
-        _nextPosition=new Vector3(_horizontalInput, 0,_verticalInput);
-        
+        _verticalInput =joystick.Vertical;
+        _nextPosition=new Vector3(_horizontalInput, 0, _verticalInput);
+        RemakeWorldInputToLocal();
+    }
+
+    private void RemakeWorldInputToLocal()
+    {
+        _nextPosition=transformCamera.TransformDirection(_nextPosition);
+        _nextPosition.y = 0;
+        _nextPosition=_nextPosition.normalized;
     }
 }

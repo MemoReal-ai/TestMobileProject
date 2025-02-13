@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class CharecterController : MonoBehaviour, IControllebl
 {
+    [Header("Character Stats")]
     [SerializeField,Range(1,1000)] private float speed = 1f;
     [SerializeField] private float gravity = 9.81f;
 
@@ -20,10 +21,6 @@ public class CharecterController : MonoBehaviour, IControllebl
     private void Awake()
     {
         _characterController = GetComponent<CharacterController>();
-       
-        if (_characterController == null)
-            throw new System.Exception("Nothing characterController");
-
     }
 
     private void FixedUpdate()
